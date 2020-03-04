@@ -1,15 +1,7 @@
 module.exports = {
+  "CRON_SCHEDULE": "3 * * * * ", // every 3 minutes
   "SENTRY": {
     "DSN": "https://442790093e7d4f70af6109f35807cced@sentry.io/1767348"
-  },
-  "ELASTICSEARCH": {
-    "URL": "http://es.services.devlocal.eyexpo.org:9200",
-    "APP_LOG_INDEX": "apm-app-logs"
-  },
-  "APM_SERVER": {
-    "SERVICE_NAME": "watchog",
-    "URL": "http://apm.services.devlocal.eyexpo.org:8200",
-    "CAPTURE_STACK_TRACES": true 
   },
   "CHECKS": [
     {
@@ -17,16 +9,16 @@ module.exports = {
       "url": "https://devlocal.eyexpo.com/appstatic/signin"
     },
     {
-       "service": "pro-api",
-       "url": "http://api.services.devlocal.eyexpo.org:8000/health"
+      "service": "pro-api",
+      "url": "http://api.services.devlocal.eyexpo.org:8000/health"
     },
     {
-       "service": "pro-auth",
-       "url": "http://auth.services.devlocal.eyexpo.org:3000/health"
+      "service": "pro-auth",
+      "url": "http://auth.services.devlocal.eyexpo.org:3000/health"
     },
     {
-       "service": "pro-legacy",
-       "url": "http://legacy.services.devlocal.eyexpo.org"
+      "service": "pro-legacy",
+      "url": "http://legacy.services.devlocal.eyexpo.org"
     },
     {
       "service": "pro-file",
@@ -45,11 +37,11 @@ module.exports = {
       "url": "http://abra.services.devlocal.eyexpo.org:3005/health"
     },
     {
-      "service": "Elastic",
+      "service": "elastic search",
       "url": "http://es.services.devlocal.eyexpo.org:9200"
     },
     {
-      "service": "APM",
+      "service": "elastic apm",
       "url": "http://apm.services.devlocal.eyexpo.org:8200"
     },
   ]

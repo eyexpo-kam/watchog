@@ -4,6 +4,7 @@ import HealthCheckerFactory from "./HealthCheckerFactory";
 import healthCheckConfig from './healthCheckConfig';
 import * as config from 'config';
 import * as Sentry from '@sentry/node';
+import * as cron from 'node-cron';
 
 const healthCheck: IHealthCheck = HealthCheckerFactory.create(healthCheckConfig);
 
@@ -11,16 +12,13 @@ Sentry.init({
   dsn: config.get('SENTRY.DSN')
 });
 
-try {
-
-  healthCheck.performChecks().then((result: IStatus[]) => {
-    console.log(result);
-    // Sentry capture exception is asynchronous so  give it some time to generate alerts
-    // before exiting otherwise it won't generate the alerts at all
-    setTimeout(() => {
-      process.exit();
-    }, 10000)
-  });
-} catch (err) {
-  console.log(err)
-}
+cron.schedule(config.get('CRON_SCHEDULE'), () => {
+  try {
+    console.log('Performing health check');
+    healthCheck.performChecks().then((result: IStatus[]) => {
+      console.log('Health check result: ', result);
+    });
+  } catch (err) {
+    console.log(err)
+  }
+});
